@@ -1,0 +1,28 @@
+<div ng-controller='moviesController'>
+	<div class='container'>
+		<div class="col-md-12">
+			<div class='row title-row'>
+				<h1 class='title' ng-bind='theater'></h1>
+			 </div>
+			<div class='showtimes' ng-repeat='show in showtimes | filter: {name: theater}'>
+				<div class='row search-row'>
+					<h4 class='title'><a href="http://maps.google.com/?q={{show.address}}">{{show.address}}</a></h4>
+					<input class='search-movie' type='text' placeholder='Search By Movie' ng-model='filter_name'>
+				</div>
+				<div class='row dates'>
+					<H4>Showtime Date</H4>
+					<form>
+						<select ng-model='newDate.date' ng-options="date.date for date in dates" ng-init='newDate.date = dates[0]' ng-change='updateShowtime(newDate)'></select>
+					</form>
+				</div>
+				<div class='row'>
+					<div class='col-md-3 box' ng-repeat="movie in show.movies | orderBy: 'name' | filter:filter_name">
+						<h5><a style="cursor:pointer" ng-click='showmovie(movie.imdb,movie.trailer)'>{{movie.name}}</a></h5>
+						<p>{{movie.rating}} {{movie.runtime}}</p>
+						<p> {{movie.showtimes.join(', ')}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

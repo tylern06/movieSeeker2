@@ -1,0 +1,25 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("a.youtube").YouTubePopup({hideTitleBar: true, showBorder: false, overlayOpacity: 0.95, width:900,height:506});
+	})
+</script>
+<div class='body' ng-controller='moviesController'>
+	<div class='container movie-page'>
+		<div class='row'>
+			<div class= 'col-md-6 col-centered'>
+				<h1 ng-bind='movie.Title'></h1>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-md-6 col-centered'>
+				<img src="{{movie.Poster}}">
+				<h4><a class='youtube' href="{{trailer}}">Watch Trailer</a></h4>
+				<p>Plot: {{movie.Plot}}</p>
+				<p ng-bind='movie.Year'>Year:</p>
+				<p>IMDb Rating: {{movie.imdbRating}}</p>
+				<p>IMDb Votes: {{movie.imdbVotes}}</p>
+				<p>Actors: {{movie.Actors}}</p>
+			</div>
+		</div>
+	</div>
+</div>
