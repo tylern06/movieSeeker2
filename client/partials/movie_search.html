@@ -1,0 +1,45 @@
+<div class='row'>
+	<div class='col-md-9'>
+		<div class='row'>
+      <div class='col-md-12'>
+			  <h1>Search Result for {{keyword.keyword}}</h1>
+      </div>
+      <div class='col-md-12' ng-repeat='movie in searched_movies | orderBy:"popularity":true'>
+        <div class='movie_card'>
+          <div class='info_poster'>
+            <a href='#/movie/{{movie.id}}'><img ng-src='http://image.tmdb.org/t/p/w370/{{movie.poster_path}}' alt='{{movie.title}}'></a>
+          </div>
+          <div class='info'>
+            <table>
+              <tr><td><b><span class='title'>{{movie.title}}</span></b></td><td width=100 align=right>{{movie.vote_average}} &#9734;</td></tr>
+              <tr><td><span ng-repeat='genre in movie.genre_ids'>{{genre}} <span></td><td align=right>{{movie.release_date}}</td></tr>
+              <tr><td colspan='2' height=140 valign=top>{{movie.overview}}</td></tr>
+              <tr><td colspan='2'><a href='#/movie/{{movie.id}}'>More info</a></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+		</div>
+	</div>
+	<div class='col-md-3'>
+		<div class='panel panel-default'>
+			<div class="panel-heading" style='background:black'>
+				<h4>Theaters Nearby</h4>
+				<form>
+					<input type='text' placeholder='Address, ZIP code' ng-model='newTheater.address'>
+					<input type='submit' value='Search'  ng-click='searchTheaters()'>
+				</form>
+			</div>
+			<ul class="list-group">
+			<div class='show' dir-paginate='show in showtimes | itemsPerPage: 15'>
+			<li class="list-group-item"><a href="#/theater/{{show.name}}">{{show.name}}</a></li>
+			</div>
+			</ul>
+				<dir-pagination-controls
+					max-size="15"
+					direction-links="true"
+					boundary-links="true" >
+				</dir-pagination-controls>
+		</div>
+	</div>
+</div>

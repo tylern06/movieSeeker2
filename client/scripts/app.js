@@ -8,6 +8,9 @@ myAppModule.config(function ($routeProvider) {
 	.when('/movie/:id',{
 		templateUrl: 'partials/movie.html'
 	})
+	.when('/movie_search',{
+		templateUrl: 'partials/movie_search.html'
+	})
 	.when('/showtime/:id',{
 		templateUrl: 'partials/showtime.html'
 	})

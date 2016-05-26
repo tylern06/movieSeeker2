@@ -1,6 +1,8 @@
 myAppModule.controller('moviesController', function ($scope, movieFactory, showtimeFactory, $routeParams, $location){
-  $scope.slideInterval = 3000;
+  $scope.slideInterval = 5000;
   var baseURL = 'http://image.tmdb.org/t/p/w370';
+  var genres = [];
+  var searched_movies = [];
   $scope.noWrapSlides = false;
   $scope.active = 0;
   // var slides = $scope.slides = [];
@@ -15,9 +17,37 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
   $scope.showtimes = [];
   // var currIndex = 0;
 
+  function genresToString(arr){
+    // console.log(arr[0]);
+    for(var i=0; i<arr.length; i++){
+      // console.log(arr[i].genre_ids);
+      for(key in arr[i].genre_ids){
+        var temp = arr[i].genre_ids[key];
+        // console.log(temp);
+        for(index in genres){
+          if(genres[index].id == temp){
+            // console.log(genres[index].name)
+            arr[i].genre_ids[key] = {
+              id: genres[index].id,
+              name: genres[index].name
+            }
+          }
+        }
+      }
+    }
+    return arr;
+  }
+
+  movieFactory.getGenres(function(data){
+		genres = data;
+    $scope.genres = genres;
+		// console.log('genres', genres);
+	})
+
   movieFactory.getMovies(function(data){
 		$scope.now_playing_movies = data;
-		// console.log($scope.now_playing_movies);
+    // console.log($scope.now_playing_movies);
+    // genresToString($scope.now_playing_movies);
     for(var i=0; i<$scope.now_playing_movies.length; i++){
       var slide = {image: baseURL + $scope.now_playing_movies[i].poster_path,
         title: $scope.now_playing_movies[i].title,
@@ -33,6 +63,7 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
       $scope.now_playing_groupslide.push(temp);
       temp = [];
     }
+    // console.log($scope.now_playing_groupslide);
 	})
 
   movieFactory.getTopRatedMovies(function(data){
@@ -85,7 +116,7 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
       };
       $scope.upcoming_slides.push(slide);
     }
-    console.log($scope.upcoming_movies);
+    // console.log($scope.upcoming_movies);
     var temp = [];
     for(var k=0; k<5; k++){
       for(var j=k*4; j<k*4+4; j++){
@@ -96,15 +127,10 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
     }
 	})
 
-  movieFactory.getGenres(function(data){
-		$scope.genres = data;
-		// console.log($scope.genres);
-	})
-
   function getShowtimes(){
  		showtimeFactory.getShowtimes(function (data){
  			$scope.showtimes = data;
-      console.log($scope.showtimes);
+      // console.log($scope.showtimes);
  		})
  	}
 
@@ -127,11 +153,18 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
 	checkInitialRequest();
 
   $scope.searchMovies = function(){
-		movieFactory.searchMovies($scope.newSearch, function (data){
-			$scope.searchMovies = data.Search
-			console.log('in search controller', data.search)
-			$scope.newSearch = {};
-		})
+    console.log($scope.search);
+    if($scope.search != null){
+      movieFactory.searchMovies($scope.search, function (data){
+        searched_movies = data
+        // console.log($scope.searched_movies)
+        $scope.searched_movies = genresToString(searched_movies);
+  			console.log('in search controller', $scope.searched_movies)
+        $scope.keyword = $scope.search;
+        $scope.search = {};
+  		})
+      $location.url('/movie_search');
+    }
 	}
 
 	function getDates(){
@@ -156,13 +189,15 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
 		})
 	}
 
-  $scope.showmovie = function(movie, trailer){
-    console.log('im in show movie', movie)
-    var imdb_id = movie.slice(movie.length-10, movie.length-1)
-    console.log(imdb_id)
-    //save trailer in factory to be retrieved from all controllers
-    movieFactory.setTrailer(trailer)
-    $location.url('/movie/' + imdb_id)
+  $scope.getMovie = function(id){
+    // console.log(id);
+    // movieFactory.getMovie(id, function(movie_info, videos){
+      // console.log(movie_info, videos);
+      // movie = data;
+      // $scope.movie = angular.extend(movie_info, videos);
+      // console.log($scope.movie)
+      $location.url('/movie/' + id);
+    // })
   }
 
   $scope.updateShowtime = function(newDate){
