@@ -4,42 +4,60 @@
       <div class='col-md-12'>
 			  <h1>Search Result for {{keyword.keyword}}</h1>
       </div>
-      <div class='col-md-12' ng-repeat='movie in searched_movies | orderBy:"popularity":true'>
-        <div class='movie_card'>
+      <div class='col-md-12'>
+        <div class='movie_card' dir-paginate='movie in searched_movies | itemsPerPage: 10 | orderBy:"popularity":true'>
           <div class='info_poster'>
             <a href='#/movie/{{movie.id}}'><img ng-src='http://image.tmdb.org/t/p/w370/{{movie.poster_path}}' alt='{{movie.title}}'></a>
           </div>
           <div class='info'>
             <table>
               <tr><td><b><span class='title'>{{movie.title}}</span></b></td><td width=100 align=right>{{movie.vote_average}} &#9734;</td></tr>
-              <tr><td><span ng-repeat='genre in movie.genre_ids'>{{genre}} <span></td><td align=right>{{movie.release_date}}</td></tr>
+              <tr><td><span ng-repeat='genre in movie.genre_ids'>{{genre.name}} <span></td><td align=right>{{movie.release_date}}</td></tr>
               <tr><td colspan='2' height=140 valign=top>{{movie.overview}}</td></tr>
               <tr><td colspan='2'><a href='#/movie/{{movie.id}}'>More info</a></td></tr>
             </table>
           </div>
         </div>
+        <dir-pagination-controls
+          max-size='10'
+          direction-links='true'
+          boundary-links='true' >
+        </dir-pagination-controls>
       </div>
 		</div>
 	</div>
-	<div class='col-md-3'>
+  <div class='col-md-3'>
 		<div class='panel panel-default'>
-			<div class="panel-heading" style='background:black'>
+			<div class='panel-heading' style='background:#04bed1'>
 				<h4>Theaters Nearby</h4>
 				<form>
 					<input type='text' placeholder='Address, ZIP code' ng-model='newTheater.address'>
-					<input type='submit' value='Search'  ng-click='searchTheaters()'>
+					<button type='submit' class='btn-md btn-default' value='Seek'  ng-click='searchTheaters()'>Seek</button>
 				</form>
 			</div>
-			<ul class="list-group">
-			<div class='show' dir-paginate='show in showtimes | itemsPerPage: 15'>
-			<li class="list-group-item"><a href="#/theater/{{show.name}}">{{show.name}}</a></li>
+			 <ul class='list-group'>
+			<div class='show'>
+			<li class='list-group-item'><a href='#/theater/{{show.name}}'>{{show.name}}</a></li>
 			</div>
 			</ul>
-				<dir-pagination-controls
-					max-size="15"
-					direction-links="true"
-					boundary-links="true" >
-				</dir-pagination-controls>
+		</div>
+		<div class='panel panel-default'>
+			<div class='panel-heading' style='background:#04bed1'>
+				<h4>Latest Movie News</h4>
+			</div>
+      <ul class='list-group'>
+ 				<div class='show' ng-repeat='article in news | pagination: curPage * pageSize | limitTo: pageSize'>
+ 					<li class='list-group-item'><a href='{{article.url}}' target='_blank'>{{article.title}}</a></li>
+ 				</div>
+ 			</ul>
+ 			<!-- 	pagination div -->
+ 			<div class='pagination-div' ng-show='news.length'>
+ 				<div class='page-links'>
+ 					<button type='button' class='btn btn-primary page-btn' ng-disabled='curPage == 0' ng-click='curPage=curPage-1'> &lt;  PREV</button>
+ 					<span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+ 					<button type='button' class='btn btn-primary page-btn' ng-disabled='curPage >= news.length/pageSize - 1' ng-click='curPage = curPage+1'>NEXT &gt; </button>
+ 				</div>
+ 			</div>
 		</div>
 	</div>
 </div>

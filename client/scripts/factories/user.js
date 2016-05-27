@@ -12,9 +12,10 @@ myAppModule.factory('userFactory', function($http){
 
 	factory.getUser = function(data, callback){
 		console.log('user data entered', data);
-		$http.get('/users/' + data.email).success(function(output){
-			console.log('found user in output', output);
-			callback(output);
+		$http.post('/users/', data).success(function(output){
+			$http.get('/session_user').success(function(session){
+				callback(session)
+			})
 		})
 	}
 
@@ -47,11 +48,5 @@ myAppModule.factory('userFactory', function($http){
       callback(data)
     })
   }
-	// factory.removeCustomer = function (id){
-	// 	console.log('customer id', id)
-	// 	$http.post('/customers/' + id).success(function(output){
-
-	// 	})
-	// }
 	return factory;
 })

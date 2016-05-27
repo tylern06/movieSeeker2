@@ -1,11 +1,11 @@
-myAppModule.controller('moviesController', function ($scope, movieFactory, showtimeFactory, $routeParams, $location){
+myAppModule.controller('moviesController', function ($scope, movieFactory, showtimeFactory, newsFactory, $routeParams, $location){
   $scope.slideInterval = 5000;
   var baseURL = 'http://image.tmdb.org/t/p/w370';
   var genres = [];
-  var searched_movies = [];
+  var page = 1;
+  var keyword = '';
   $scope.noWrapSlides = false;
   $scope.active = 0;
-  // var slides = $scope.slides = [];
   $scope.now_playing_slides = [];
   $scope.now_playing_groupslide = [];
   $scope.top_rated_slides = [];
@@ -15,10 +15,9 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
   $scope.upcoming_slides = [];
   $scope.upcoming_groupslide = [];
   $scope.showtimes = [];
-  // var currIndex = 0;
 
   function genresToString(arr){
-    // console.log(arr[0]);
+    console.log(arr.length);
     for(var i=0; i<arr.length; i++){
       // console.log(arr[i].genre_ids);
       for(key in arr[i].genre_ids){
@@ -128,38 +127,44 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
 	})
 
   function getShowtimes(){
- 		showtimeFactory.getShowtimes(function (data){
- 			$scope.showtimes = data;
-      // console.log($scope.showtimes);
- 		})
- 	}
+    showtimeFactory.getShowtimes(function (data){
+      $scope.showtimes = data
+    })
+  }
 
   //check if getShowtimes AJAX request has been done intially
-	function checkInitialRequest(){
-		showtimeFactory.getInitialShowtime(function (status){
-			console.log('showtime status', status)
-			if(status == false){
-				getShowtimes();
-			}else{
-				//get the saved showtime if AJAX request already been done
-				showtimeFactory.getSavedShowtimes(function (showtimes){
-					$scope.showtimes = showtimes
-					console.log('saved showtimes', showtimes)
-				})
-			}
-		})
-	}
-	// getShowtimes();
-	checkInitialRequest();
+  function checkInitialRequest(){
+    showtimeFactory.getInitialShowtime(function (status){
+      // console.log('showtime status', status)
+      if(status == false){
+        getShowtimes();
+      }else{
+        //get the saved showtime if AJAX request already been done
+        showtimeFactory.getSavedShowtimes(function (showtimes){
+          $scope.showtimes = showtimes
+          // console.log('saved showtimes', showtimes)
+        })
+      }
+    })
+  }
+
+  function getNews(){
+    newsFactory.getNews(function (data){
+      $scope.news = data
+      // console.log('news in controller', data)
+    })
+  }
+  checkInitialRequest();
+  getNews();
 
   $scope.searchMovies = function(){
     console.log($scope.search);
     if($scope.search != null){
       movieFactory.searchMovies($scope.search, function (data){
-        searched_movies = data
-        // console.log($scope.searched_movies)
-        $scope.searched_movies = genresToString(searched_movies);
-  			console.log('in search controller', $scope.searched_movies)
+        $scope.searched_movies = data
+        searched_movies = genresToString($scope.searched_movies);
+  			console.log('in controller', $scope.searched_movies)
+        console.log($scope.searched_movies.length)
         $scope.keyword = $scope.search;
         $scope.search = {};
   		})
@@ -167,37 +172,44 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
     }
 	}
 
-	function getDates(){
-		showtimeFactory.getDates(function (dates){
-			$scope.dates = dates
-		})
-	}
-	//if theater name exist, set scope.theater
-	if($routeParams.name != null ){
-		$scope.theater = $routeParams.name
-		getDates();
-		console.log('theater', $scope.theater)
-	}
-	//if moviename exist, getMovie
-	if($routeParams.id != null){
-		movieFactory.getMovie($routeParams.id,function (data){
-			$scope.movie = data
-			movieFactory.getTrailer(function (output){
-				$scope.trailer = output
-				console.log('trailer', output)
-			})
-		})
-	}
+  function getDates(){
+    showtimeFactory.getDates(function (dates){
+      $scope.dates = dates
+    })
+  }
+
+  function gDate(){
+    movieFactory.gDate(function (date){
+      $scope.date = date
+    })
+  }
+  //if theater name exist, set scope.theater
+  if($routeParams.name != null ){
+    $scope.theater = $routeParams.name
+    getDates();
+    gDate();
+    console.log('theater', $scope.theater)
+  }
+  //if moviename exist, getMovie
+  if($routeParams.id != null){
+    movieFactory.getMovie($routeParams.id,function (data){
+      $scope.movie = data
+      movieFactory.getTrailer(function (output){
+        $scope.trailer = output
+        console.log('trailer', output)
+      })
+    })
+  }
 
   $scope.getMovie = function(id){
-    // console.log(id);
-    // movieFactory.getMovie(id, function(movie_info, videos){
-      // console.log(movie_info, videos);
-      // movie = data;
-      // $scope.movie = angular.extend(movie_info, videos);
-      // console.log($scope.movie)
       $location.url('/movie/' + id);
-    // })
+  }
+
+  $scope.showMovie = function(imdbURL){
+    console.log(imdbURL)
+    var imdb_id = imdbURL.slice(imdbURL.length-10, imdbURL.length-1);
+    console.log(imdb_id)
+    $location.url('/movie/' + imdb_id);
   }
 
   $scope.updateShowtime = function(newDate){
@@ -205,8 +217,10 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
     console.log('newDate', newDate)
     showtimeFactory.updateShowtime(newDate, function (output){
       console.log('output update', output)
+      $scope.showtimes = output
+      movieFactory.sDate(newDate.date.date)
+      gDate();
     })
-
   }
 
   $scope.searchTheaters = function(){
@@ -216,4 +230,11 @@ myAppModule.controller('moviesController', function ($scope, movieFactory, showt
     })
     $scope.newTheater = {};
   }
+
+  $scope.curPage = 0;
+  $scope.pageSize = 8;
+
+  $scope.numberOfPages = function() {
+    return Math.ceil($scope.news.length / $scope.pageSize);
+  };
 })

@@ -11,6 +11,9 @@ myAppModule.config(function ($routeProvider) {
 	.when('/movie_search',{
 		templateUrl: 'partials/movie_search.html'
 	})
+	.when('/movie_search/:page_num',{
+		templateUrl: 'partials/movie_search.html'
+	})
 	.when('/showtime/:id',{
 		templateUrl: 'partials/showtime.html'
 	})
@@ -25,12 +28,19 @@ myAppModule.config(function ($routeProvider) {
 	});
 });
 
-myAppModule.filter("myFilter", function(){
-	// In the return function, we must pass in a single parameter which will be the data we will work on.
-  // We have the ability to support multiple other parameters that can be passed into the filter optionally
-  return function(input, optional1, optional2) {
-    var output;
-    // Do filter work here
-    return output;
+//filter for pagination
+myAppModule.filter('pagination', function() {
+  return function(input, start) {
+    if (!input || !input.length) { return; }
+    start = +start; //parse to int
+    return input.slice(start);
   }
 });
+
+myAppModule.directive('onLastRepeat', function() {
+  return function(scope, element, attrs) {
+    if (scope.$last) setTimeout(function(){
+        scope.$emit('onRepeatLast', element, attrs);
+    }, 1);
+  };
+})

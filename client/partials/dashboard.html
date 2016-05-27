@@ -1,80 +1,97 @@
 <div class='row'>
 	<div class='col-md-9'>
-		<div class='subcontent'>
-			<h1>Now Playing Movies</h1>
-			<carousel interval='slideInterval'>
-		    <slide ng-repeat='slideCollection in now_playing_groupslide' active='slide.active'>
-		      <div class='carousel_poster'>
-		        <a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
-		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
-		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
-						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
-		      </div>
-		    </slide>
-		  </carousel>
+		<div class='subcontent row'>
+      <div class='col-md-12'>
+        <div>
+    			<h2>Now Playing Movies</h2>
+        </div>
+  			<carousel interval='slideInterval'>
+  		    <slide ng-repeat='slideCollection in now_playing_groupslide' active='slide.active'>
+  		      <div class='carousel_poster'>
+  		        <a ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
+  		        <a ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
+  		        <a ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
+  						<a ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
+  		      </div>
+  		    </slide>
+  		  </carousel>
+      </div>
 		</div>
-		<div class='subcontent'>
-			<h1>Top Rated Movies</h1>
-			<carousel interval='slideInterval'>
-		    <slide ng-repeat='slideCollection in top_rated_groupslide' active='slide.active'>
-		      <div class='carousel_poster'>
-						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
-		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
-		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
-						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
-		      </div>
-		    </slide>
-		  </carousel>
+		<div class='subcontent row'>
+      <div class='col-md-12'>
+  			<h2>Top Rated Movies</h2>
+  			<carousel interval='slideInterval'>
+  		    <slide ng-repeat='slideCollection in top_rated_groupslide' active='slide.active'>
+  		      <div class='carousel_poster'>
+  						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
+  		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
+  		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
+  						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
+  		      </div>
+  		    </slide>
+  		  </carousel>
+      </div>
 		</div>
-		<div class='subcontent'>
-			<h1>Popular Movies</h1>
-			<carousel interval='slideInterval'>
-		    <slide ng-repeat='slideCollection in popular_groupslide' active='slide.active'>
-		      <div class='carousel_poster'>
-						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
-		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
-		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
-						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
-		      </div>
-		    </slide>
-		  </carousel>
+		<div class='subcontent row'>
+      <div class='col-md-12'>
+  			<h2>Popular Movies</h2>
+  			<carousel interval='slideInterval'>
+  		    <slide ng-repeat='slideCollection in popular_groupslide' active='slide.active'>
+  		      <div class='carousel_poster'>
+  						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
+  		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
+  		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
+  						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
+  		      </div>
+  		    </slide>
+  		  </carousel>
+      </div>
 		</div>
-		<div class='subcontent'>
-			<h1>Upcoming Movies</h1>
-			<carousel interval='slideInterval'>
-		    <slide ng-repeat='slideCollection in upcoming_groupslide' active='slide.active'>
-		      <div class='carousel_poster'>
-						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
-		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
-		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
-						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
-		      </div>
-		    </slide>
-		  </carousel>
+		<div class='subcontent row'>
+      <div class='col-md-12'>
+  			<h2>Upcoming Movies</h2>
+  			<carousel interval='slideInterval'>
+  		    <slide ng-repeat='slideCollection in upcoming_groupslide' active='slide.active'>
+  		      <div class='carousel_poster'>
+  						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
+  		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
+  		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
+  						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
+  		      </div>
+  		    </slide>
+  		  </carousel>
+      </div>
 		</div>
-		<!-- <div ng-repeat='genre in genres'>
-			{{genre.id}}: {{genre.name}}
-		</div> -->
 	</div>
-	<div class='col-md-3'>
+  <div class='col-md-3' ng-controller='moviesController'>
 		<div class='panel panel-default'>
-			<div class="panel-heading" style='background:black'>
+			<div class='panel-heading' style='background:#04bed1'>
 				<h4>Theaters Nearby</h4>
 				<form>
 					<input type='text' placeholder='Address, ZIP code' ng-model='newTheater.address'>
-					<input type='submit' value='Search'  ng-click='searchTheaters()'>
+					<button type='submit' class='btn-md btn-default' value='Seek' ng-click='searchTheaters()'>Seek</button>
 				</form>
 			</div>
-			 <ul class="list-group">
-			<div class='show' dir-paginate='show in showtimes | itemsPerPage: 15'>
-			<li class="list-group-item"><a href="#/theater/{{show.name}}">{{show.name}}</a></li>
-			</div>
+			<ul class='list-group'>
+  			<div class='show' dir-paginate='show in showtimes | itemsPerPage: 15'>
+  			  <li class='list-group-item'><a href='#/theater/{{show.name}}'>{{show.name}}</a></li>
+  			</div>
 			</ul>
 			<dir-pagination-controls
-				max-size="15"
-				direction-links="true"
-				boundary-links="true" >
+				max-size='15'
+				direction-links='true'
+				boundary-links='true' >
 			</dir-pagination-controls>
+		</div>
+		<div class='panel panel-default'>
+			<div class='panel-heading' style='background:#04bed1'>
+				<h4>Latest Movie News</h4>
+			</div>
+			 <ul class='list-group'>
+				<div class='show' ng-repeat='article in news.results | limitTo: 10'>
+					<li class='list-group-item'><a href='{{article.url}}' target='_blank'>{{article.title}}</li>
+				</div>
+			</ul>
 		</div>
 	</div>
 </div>

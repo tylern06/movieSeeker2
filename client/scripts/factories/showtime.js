@@ -20,24 +20,24 @@ myAppModule.factory('showtimeFactory', function($http){
 	}
 
 	factory.updateShowtime = function(newDate, callback){
-		$http.get("https://freegeoip.net/json/").success(function (location) {
-		 	console.log('location', location)
+		$http.get('https://freegeoip.net/json/').success(function (location) {
+			// 	console.log('location', location)
 		 	newDate.location = location
 		 	// console.log('newDate', newDate)
   		$http.post('/showtimes/update', newDate).success(function (output){
-    		console.log('showtimes', output)
-    		// showtimes = output
-    		// initialShowtime = true
-    		// callback(output)
+    		// console.log('showtimes', output)
+    		showtimes = output
+    		initialShowtime = true
+    		callback(output)
     	})
 		})
 	}
 
   factory.getShowtimes = function (callback){
-  	$http.get("https://freegeoip.net/json/").success(function (location) {
-		 	console.log('location', location)
+  	$http.get('https://freegeoip.net/json/').success(function (location) {
+			// 	console.log('location', location)
   		$http.post('/showtimes',location).success(function (output){
-    		console.log('showtimes', output)
+    		// console.log('showtimes', output)
     		showtimes = output
     		initialShowtime = true
     		callback(output)

@@ -7,8 +7,8 @@
 }
 
 .carousel_poster img{
-  margin:auto;
-  width: 169.5px;
+  width: 200px;
+	vertical-align: top;
 }
 
 .display-mode {
@@ -29,16 +29,19 @@
 }
 
 div.box{
-/*	border: 1px solid black;*/
+	width: 150px;
 	min-height: 15%;
 	padding-left: 0px;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 10px;
 }
 
 div.dates{
 	margin-bottom: 2%;
 }
 div.title-row{
-	margin-top: 5%;
+	margin-top: 10px;
 }
 div.title{
 	text-align: center;
@@ -68,28 +71,109 @@ body{
 	color: #F8F8F8;
 }
 
-.subcontent h1{
+.subcontent h2{
 	margin: 0px 0px 5px;
 }
 
 .subcontent{
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 a {
-	color: #86c5da;
+	color: #04bed1;
+  cursor: pointer;
 }
 
 li.list-group-item{
 	background-color: #191919;
+  border: #707070;
 }
 
 li.list-group-item a{
 	color: #F8F8F8;
+/*  color: black;*/
+}
+
+.navbar-default {
+  border: #191919;
+}
+
+/*set nav bar background color*/
+nav.navbar.navbar-default, nav.user_name{
+  background-color: #191919;
+}
+
+.welcome_message{
+	font-size: 20px;
+}
+
+.active{
+	margin-top: 20px;
+}
+
+#log_out{
+	margin-top: 8px;
 }
 
 .panel-default h4{
-	color: white;
+  color: white;
+}
+div.navbar-header{
+  height: 70px;
+ /* border: 0px;*/
+}
+
+.logo{
+  position: relative;
+  bottom: 28px;
+  max-width: 200px;
+  height: auto
+}
+
+div.navbar-form{
+  position: relative;
+  left: 50px;
+  top: 10px;
+}
+
+.panel{
+  border:none;
+  padding:0;
+}
+
+.panel-heading{
+  border:none;
+  padding:10px;
+  margin:0;
+}
+
+.panel-body{
+  border:1px solid #ccc;
+  padding:10px;
+  border-top:0;
+}
+
+div.collapse, div.navbar-collapse{
+  background: #191919;
+}
+
+a.carousel-control.right, a.carousel-control.left{
+  opacity: 0;
+}
+
+li.dropdown a.dropdown-toggle{
+  color: white;
+}
+
+#sign_up, #log_in{
+	margin-top: 10px;
+}
+
+#searchMovie {
+  background: #04bed1;
+  border: none;
+  color: white;
+
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -109,7 +193,7 @@ li.list-group-item a{
 }
 
 .movie_card {
-	border: 1px solid silver;
+	/*border: 1px solid silver;*/
 	margin-bottom: 20px;
 }
 
@@ -121,10 +205,6 @@ li.list-group-item a{
 .info_poster img{
   margin:auto;
   width: 140px;
-}
-
-.info table, .info td{
-	border: 1px solid white;
 }
 
 .info table{
@@ -155,4 +235,24 @@ h1{
 .detail_poster img{
   margin:auto;
   width: 300px;
+}
+
+div.page-links{
+  text-align: center;
+}
+
+button.page-btn {
+	background-color: #04bed1;
+}
+
+.review h2{
+	margin: 30px 0px 10px;
+}
+
+.leave_review{
+	color: black;
+}
+
+#review{
+	color: black;
 }

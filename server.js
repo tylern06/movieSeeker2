@@ -17,11 +17,15 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); /
 app.use('/ui', express.static(__dirname + '/node_modules/angular-ui-bootstrap/dist')); // redirect ui bootstrap
 app.use('/fonts', express.static(__dirname + '/node_modules/bootstrap/fonts')); // redirect ui bootstrap
 
+
 // Setting our Static Folder Directory
 app.use(express.static(path.join(__dirname, "./client")));
 require('./server/config/mongoose.js')
 var routes_setter = require('./server/config/routes.js');
 routes_setter(app);
+
+
+
 
 // Setting our Server to Listen on Port: 8000
 app.listen(8000, function() {

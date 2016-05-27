@@ -1,28 +1,62 @@
-<div ng-controller='moviesController'>
-	<div class='container'>
-		<div class="col-md-12">
-			<div class='row title-row'>
-				<h1 class='title' ng-bind='theater'></h1>
-			 </div>
-			<div class='showtimes' ng-repeat='show in showtimes | filter: {name: theater}'>
-				<div class='row search-row'>
-					<h4 class='title'><a href="http://maps.google.com/?q={{show.address}}">{{show.address}}</a></h4>
-					<input class='search-movie' type='text' placeholder='Search By Movie' ng-model='filter_name'>
-				</div>
-				<div class='row dates'>
-					<H4>Showtime Date</H4>
-					<form>
-						<select ng-model='newDate.date' ng-options="date.date for date in dates" ng-init='newDate.date = dates[0]' ng-change='updateShowtime(newDate)'></select>
-					</form>
-				</div>
-				<div class='row'>
-					<div class='col-md-3 box' ng-repeat="movie in show.movies | orderBy: 'name' | filter:filter_name">
-						<h5><a style="cursor:pointer" ng-click='showmovie(movie.imdb,movie.trailer)'>{{movie.name}}</a></h5>
-						<p>{{movie.rating}} {{movie.runtime}}</p>
-						<p> {{movie.showtimes.join(', ')}}</p>
+<div class='row'>
+	<div class='col-md-9'>
+		<div ng-controller='moviesController'>
+			<div class='row'>
+				<div class='col-md-12'>
+					<h1>{{theater}}</h1>
+					<div class='showtimes' ng-repeat='show in showtimes | filter: {name: theater}'>
+						<div class='search-row'>
+							<h4 class='title'><a href='http://maps.google.com/?q={{show.address}}'>{{show.address}}</a></h4>
+							<input class='search-movie' type='text' placeholder='Search By Movie' ng-model='filter_name'>
+						</div>
+						<div class='dates'>
+							<h4>Showtime Date</h4>
+							<h4>{{date}}</h4>
+							<form>
+								<select ng-model='newDate.date' ng-options='date.date for date in dates'  ng-change='updateShowtime(newDate)'></select>
+							</form>
+						</div>
+						<div>
+							<div class='box' ng-repeat='movie in show.movies | orderBy: "name" | filter:filter_name'>
+								<h5><a style='cursor:pointer' ng-click='showMovie(movie.imdb)'>{{movie.name}}</a></h5>
+								<p>{{movie.rating}} {{movie.runtime}}</p>
+								<p>{{movie.showtimes.join(', ')}}</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class='col-md-3'>
+		<div class='panel panel-default'>
+			<div class='panel-heading' style='background:#04bed1'>
+				<h4>Theaters Nearby</h4>
+				<form>
+					<input type='text' placeholder='Address, ZIP code' ng-model='newTheater.address'>
+					<button type='submit' class='btn-md btn-default' value='Seek' ng-click='searchTheaters()'>Seek</button>
+				</form>
+			</div>
+			 <ul class='list-group'>
+			<div class='show' dir-paginate='show in showtimes | itemsPerPage: 15'>
+			<li class='list-group-item'><a href='#/theater/{{show.name}}'>{{show.name}}</a></li>
+			</div>
+			</ul>
+			<dir-pagination-controls
+				max-size='15'
+				direction-links='true'
+				boundary-links='true' >
+			</dir-pagination-controls>
+		</div>
+		<div class='panel panel-default'>
+			<div class='panel-heading' style='background:#04bed1'>
+				<h4>Latest Movie News</h4>
+			</div>
+			 <ul class='list-group'>
+				<div class='show' ng-repeat='article in news.results | limitTo: 10'>
+					<li class='list-group-item'><a href='{{article.url}}' target='_blank'>{{article.title}}</li>
+				</div>
+			</ul>
 		</div>
 	</div>
 </div>
