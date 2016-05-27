@@ -1,0 +1,103 @@
+<div ng-controller='moviesController'>
+	<div class='col-md-9'>
+		<div>
+			<h2>Now Playing</h2>
+			<carousel interval='slideInterval'>
+		    <slide ng-repeat='slideCollection in now_playing_groupslide' active='slide.active'>
+		      <div class='carousel_poster'>
+		        <a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
+		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
+		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
+						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
+		      </div>
+		    </slide>
+		  </carousel>
+		</div>
+		<div class='subcontent'>
+			<h2>Top Rated</h2>
+			<carousel interval='slideInterval'>
+		    <slide ng-repeat='slideCollection in top_rated_groupslide' active='slide.active'>
+		      <div class='carousel_poster'>
+						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
+		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
+		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
+						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
+		      </div>
+		    </slide>
+		  </carousel>
+		</div>
+		<div class='subcontent'>
+			<h2>Popular</h2>
+			<carousel interval='slideInterval'>
+		    <slide ng-repeat='slideCollection in popular_groupslide' active='slide.active'>
+		      <div class='carousel_poster'>
+						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
+		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
+		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
+						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
+		      </div>
+		    </slide>
+		  </carousel>
+		</div>
+		<div class='subcontent'>
+			<h2>Upcoming</h2>
+			<carousel interval='slideInterval'>
+		    <slide ng-repeat='slideCollection in upcoming_groupslide' active='slide.active'>
+		      <div class='carousel_poster'>
+						<a href='' ng-click='getMovie(slideCollection[0].id)'><img ng-src='{{slideCollection[0].image}}' alt='{{slideCollection[0].title}}' style='margin:auto;'></a>
+		        <a href='' ng-click='getMovie(slideCollection[1].id)'><img ng-src='{{slideCollection[1].image}}' alt='{{slideCollection[1].title}}' style='margin:auto;'></a>
+		        <a href='' ng-click='getMovie(slideCollection[2].id)'><img ng-src='{{slideCollection[2].image}}' alt='{{slideCollection[2].title}}' style='margin:auto;'></a>
+						<a href='' ng-click='getMovie(slideCollection[3].id)'><img ng-src='{{slideCollection[3].image}}' alt='{{slideCollection[3].title}}' style='margin:auto;'></a>
+		      </div>
+		    </slide>
+		  </carousel>
+		</div>
+	</div>
+	<div class='col-md-3'>
+		<div class='panel panel-default'>
+			<div class="panel-heading" style='background:#04bed1'>
+				<h4>Theaters Nearby</h4>
+				<form>
+					<input type='text' placeholder='Address, ZIP code' ng-model='newTheater.address'>
+					<button type='submit' class='btn-md btn-default' value='Seek'  ng-click='searchTheaters()'>Seek</button>
+				</form>
+			</div>
+			 <ul class="list-group">
+				<div class='show' ng-repeat='show in showtimes | pagination: curPage2 * pageSize2 | limitTo: pageSize2'>
+					<li class="list-group-item"><a href="#/theater/{{show.name}}">{{show.name}}</a></li>
+				</div>
+			</ul>
+				<!-- 	pagination div -->
+			<div class="pagination-div" ng-show="showtimes.length">
+				<div class='page-links'>
+					<button type="button" class="btn btn-primary page-btn" ng-disabled="curPage2 == 0" ng-click="curPage2=curPage2-1"> &lt;  PREV</button>
+					<span>Page {{curPage2 + 1}} of {{ numberOfPages2() }}</span>
+					<button type="button" class="btn btn-primary page-btn" ng-disabled="curPage2 >= showtimes.length/pageSize2 - 1" ng-click="curPage2 = curPage2+1">NEXT &gt; </button>
+				</div>
+			</div> <!-- end of pagination -->
+		</div>
+
+		<div class='panel panel-default'>
+			<div class="panel-heading" style='background:#04bed1'>
+				<h4>Latest Movie News</h4>
+			</div>
+			 <ul class="list-group">
+				<div class='show' ng-repeat='article in news | pagination: curPage * pageSize | limitTo: pageSize'>
+					<li class="list-group-item"><a href="{{article.url}}" target="_blank">{{article.title}}</a></li>
+				</div>
+			</ul>
+			<!-- 	pagination div -->
+			<div class="pagination-div" ng-show="news.length">
+				<div class='page-links'>
+					<button type="button" class="btn btn-primary page-btn" ng-disabled="curPage == 0" ng-click="curPage=curPage-1"> &lt;  PREV</button>
+					<span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+					<button type="button" class="btn btn-primary page-btn" ng-disabled="curPage >= news.length/pageSize - 1" ng-click="curPage = curPage+1">NEXT &gt; </button>
+				</div>
+			</div> <!-- end of pagination -->
+  	</div>
+	</div>
+</div>
+				
+			
+		
+

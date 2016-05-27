@@ -1,0 +1,61 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("a.youtube").YouTubePopup({hideTitleBar: true, showBorder: false, overlayOpacity: 0.95, width:860,height:505});	
+	})
+	$(document).on('click', 'a.youtube', function() {
+		YouTubePopup({hideTitleBar:true, showBorder:false, overlayOpacity:0.95, width:860, height:506});
+	});
+</script>
+<div class='row'>
+	<div class='col-md-9'>
+		<div ng-controller='movieController'>
+			<div class='row'>
+	      <div class='col-md-12'>
+					<div class='detail_poster'>
+						<img ng-src='http://image.tmdb.org/t/p/w370/{{movie.poster_path}}' alt='{{movie.title}}'>
+					</div>
+					<div class='detail_info'>
+						<h1>{{movie.title}}</h1>
+						<b>Rating:</b> {{movie.imdbRating}}<br>
+						<b>Rated:</b> {{movie.Rated}}<br>
+						<b>Genre:</b> {{movie.Genre}}<br>
+						<b>Runtime:</b> {{movie.Runtime}}<br>
+						<b>Release data:</b> {{movie.Released}}<br>
+						<b>Overview:</b> {{movie.overview}}<br><br>
+						<b>Credits:</b><br>
+						Actors: {{movie.Actors}}<br>
+						Director: {{movie.Director}}<br>
+						Writer: {{movie.Writer}}<br><br>
+						<b>Trailer:</b><br>
+						<a href='https://www.youtube.com/watch?v={{movie.results[0].key}}' class='youtube'>{{movie.results[0].name}}</a><br>
+						<!-- <div ng-repeat='trailer in movie.results' on-finish-render>
+							<a class='youtube' href='https://www.youtube.com/watch?v={{trailer.key}}'>{{trailer.name}}</a><br>
+						</div> -->
+					</div>
+	      </div>
+			</div>
+		</div>
+	</div>
+	<div class='col-md-3'>
+		<div class='panel panel-default'>
+			<div class="panel-heading" style='background:black'>
+				<h4>Theaters Nearby</h4>
+				<form>
+					<input type='text' placeholder='Address, ZIP code' ng-model='newTheater.address'>
+					<input type='submit' value='Search'  ng-click='searchTheaters()'>
+				</form>
+			</div>
+			<ul class="list-group">
+			<div class='show' dir-paginate='show in showtimes | itemsPerPage: 15'>
+			<li class="list-group-item"><a href="#/theater/{{show.name}}">{{show.name}}</a></li>
+			</div>
+			</ul>
+				<dir-pagination-controls
+					max-size="15"
+					direction-links="true"
+					boundary-links="true" >
+				</dir-pagination-controls>
+		</div>
+	</div>
+</div>
+
