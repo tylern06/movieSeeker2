@@ -2,18 +2,21 @@ myAppModule.factory('reviewFactory', function($http){
   var reviews = [];
   var factory = {};
 
-  factory.index = function(callback) {
-    $http.get('/reviews').success(function(data) {
+  factory.getReviews = function(imdbID, callback) {
+    console.log(imdbID);
+    $http.get('/reviews/' + imdbID).success(function(data) {
       // console.log('Data received successfully');
       reviews = data;
       callback(reviews);
     })
   }
-  factory.addReview = function(user_id, newReview, callback){
-    console.log(user_id, newReview);
+
+  factory.addReview = function(new_review, imdbID, user_id, callback){
     console.log('I am in reviewFactory front-end side');
-    $http.post('/create_review/', user_id, newReview).success(function(topic){
-      $http.get('/reviews').success(function(data) {
+    var newData = {review: new_review, imdbID: imdbID, creator: user_id};
+    console.log(newData);
+    $http.post('/create_review/', newData).success(function(review){
+      $http.get('/reviews/' + imdbID).success(function(data) {
         reviews = data;
         callback(reviews);
       })

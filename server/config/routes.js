@@ -36,7 +36,7 @@ module.exports = function(app){
 		showtimes.update(req, res);
 	})
 
-	app.get('/reviews', function (req, res){
+	app.get('/reviews/:imdbID', function (req, res){
 	  reviews.index(req,res);
 	})
 	app.post('/create_review', function (req, res){

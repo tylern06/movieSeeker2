@@ -30,16 +30,16 @@
 					<h2>Reivews</h2>
 					<hr>
 					<h4>User Reviews</h4>
-					<div ng-controller='reviewsController'>
-						<div ng-repeat='review in reviews.results'>
-							<u>{{review.author}}</u><br>
-							{{review.content}}<br><br>
+					<div>
+						<div ng-repeat='review in our_reviews'>
+							<u>{{review._creator.name}}</u><br>
+							{{review.review}}<br><br>
 						</div>
 						<div style='text-align: right;'>
 							<form>
 								<textarea id='review' ng-model='new_review.content' cols='165' rows='3'></textarea><br>
 								<!-- <input class='leave_review' type='submit' value='Add your review' ng-click='addReview(sessionUser._id)'> -->
-								<button type='submit' class='btn-md btn-default' ng-click='addReview(new_review.content)'>Add your review</button>
+								<button type='submit' class='btn-md btn-default' ng-click='addReview(movie.imdbID)'>Add your review</button>
 							</form>
 						</div>
 					</div>
