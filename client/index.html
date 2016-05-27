@@ -54,14 +54,12 @@
             <!--   <ul class='nav navbar-nav'>
               	<li class='active'><a href='#/'>Home</a></li>
               </ul> -->
-              <div class='navbar-form navbar-left' role='search'>
+              <form class='navbar-form navbar-left' role='search'>
                 <div class='form-group'>
-                  <form>
-                    <input type='text' ng-model='search.keyword' placeholder='Find Movies' class='form-control' >
-                    <button type='submit' class='btn btn-default' id='searchMovie' ng-click='searchMovies()'>Seek</button>
-                  </form>
-                </div>
-              </div>
+                  <input type='text' ng-model='search.keyword' placeholder='Find Movies' class='form-control' >
+                  <button type='submit' class='btn btn-default' id='searchMovie' ng-click='searchMovies()'>Seek</button>
+                 </div>
+              </form>
               <ul class='nav navbar-nav navbar-right' ng-if='!sessionUser.loggedIn' ng-controller='usersController'>
 								<!-- Sign Up dropdown-menu -->
 								<li class='dropdown'>
@@ -133,7 +131,7 @@
               		<button class='btn btn-default' ng-click='logout()'>Log out</button>
 								</form>
               </ul>
-            </div>
+            </div> <!-- end of nav bar collapse -->
          	</nav>
       	</div>
 		  </div>
