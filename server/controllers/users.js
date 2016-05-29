@@ -41,17 +41,22 @@ module.exports = {
 		});
 	},
 	find: function(req,res){
-		console.log(req.params.email);
-		User.findOne({email: req.params.email}, function(err, user){
+		console.log(req.body);
+		User.findOne({email: req.body.email}, function(err, user){
 			if(err){
 				res.json(err)
 			} else {
-				sessionUser = {
-					loggedIn : true,
-					name : user.name,
-					_id : user._id
-				}
-				console.log(sessionUser);
+				if(user.password == req.body.password){
+					sessionUser = {
+						loggedIn : true,
+						name : user.name,
+						_id : user._id
+					}
+				} else {
+          console.log('log in failed');
+        }
+        // console.log(user.password, req.body.password);
+				// console.log(sessionUser);
 				res.json(user);
 			}
 		})
@@ -62,11 +67,5 @@ module.exports = {
 	logout: function(req, res){
     sessionUser = {loggedIn: false}
     res.json({status: true, sessionUser: sessionUser})
-	// destroy: function(req,res){
-	// 	console.log('req.params.id in destroy', req.params.id)
-	// 	User.remove({_id: req.params.id},function(err,customer){
-	// 		console.log('customer in destroy', customer)
-	// 		res.redirect('/')
-	// 	})
 	}
 }

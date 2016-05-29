@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en' ng-app='myApp'>
-	<head>
-		<title>The Movie Seeker</title>
+  <head>
+    <title>The Movie Seeker</title>
 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script type='text/javascript' src='http://code.jquery.com/jquery-2.2.2.js'></script>
@@ -10,134 +10,134 @@
     <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js'></script>
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
     <link href='/css/bootstrap.css' rel='stylesheet'>
     <script src='/js/bootstrap.js'></script>
     <link href='/stylesheets/style.css' rel='stylesheet'>
     <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>
-		<script type="text/javascript" src="scripts/jquery.youtubepopup.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.youtubepopup.min.js"></script>
 
-		<script src='scripts/app.js'></script>
-		<script type="text/javascript" src="scripts/jquery.youtubepopup.min.js"></script>
-		<script src='scripts/dirPagination.js'></script>
-		<script src='scripts/controllers/users.js'></script>
-		<script src='scripts/factories/user.js'></script>
-		<script src='scripts/controllers/reviews.js'></script>
-		<script src='scripts/factories/review.js'></script>
-		<script src='scripts/controllers/movies.js'></script>
-		<script src='scripts/controllers/movie.js'></script>
-		<script src='scripts/factories/movie.js'></script>
-		<script src='scripts/factories/showtime.js'></script>
+    <script src='scripts/app.js'></script>
+    <script type="text/javascript" src="scripts/jquery.youtubepopup.min.js"></script>
+    <script src='scripts/dirPagination.js'></script>
+    <script src='scripts/controllers/users.js'></script>
+    <script src='scripts/factories/user.js'></script>
+    <script src='scripts/controllers/reviews.js'></script>
+    <script src='scripts/factories/review.js'></script>
+    <script src='scripts/controllers/movies.js'></script>
+    <script src='scripts/controllers/movie.js'></script>
+    <script src='scripts/factories/movie.js'></script>
+    <script src='scripts/factories/showtime.js'></script>
     <script src='scripts/factories/news.js'></script>
-		<script>
-			$(document).ready(function(){
-		    //Handles menu drop down
-		    $('.dropdown-menu').find('form').click(function (e) {
-		        e.stopPropagation();
-		    });
-			});
-		</script>
-	</head>
-	<body>
-		<div class='container' ng-controller='moviesController'>
-			<div class='row'>
-		    <div class='col-md-12'>
-		    	<nav class='navbar navbar-default' role='navigation'>
+    <script src='scripts/factories/review.js'></script>
+    <script>
+      $(document).ready(function(){
+        //Handles menu drop down
+        $('.dropdown-menu').find('form').click(function (e) {
+            e.stopPropagation();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class='container' ng-controller='moviesController'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <nav class='navbar navbar-default' role='navigation'>
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class='navbar-header'>
-	            <a class='navbar-brand' href='#/'><img class='logo' src="/images/The-Movie-Seeker-07.png" ></a>
+              <a class='navbar-brand' href='#/'><img class='logo' src="/images/The-Movie-Seeker-07.png" ></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class='collapse navbar-collapse'>
-            <!--   <ul class='nav navbar-nav'>
-              	<li class='active'><a href='#/'>Home</a></li>
-              </ul> -->
-              <form class='navbar-form navbar-left' role='search'>
+              <form class='navbar-form navbar-left' id='search_form' role='search'>
                 <div class='form-group'>
                   <input type='text' ng-model='search.keyword' placeholder='Find Movies' class='form-control' >
                   <button type='submit' class='btn btn-default' id='searchMovie' ng-click='searchMovies()'>Seek</button>
-                 </div>
+                </div>
               </form>
-              <ul class='nav navbar-nav navbar-right' ng-if='!sessionUser.loggedIn' ng-controller='usersController'>
-								<!-- Sign Up dropdown-menu -->
-								<li class='dropdown'>
-                  <a href='' class='dropdown-toggle' data-toggle='dropdown'>Sign Up <b class='caret'></b></a>
-                  <ul class='dropdown-menu' style='padding: 15px;min-width: 250px;'>
-                    <li>
-                      <div class='row'>
-                        <div class='col-md-12'>
-                        	<form class='form' role='form' id='login-nav'>
-														<div class='form-group'>
-                              <label class='sr-only' for='Name'>Name</label>
-                              <input type='text' class='form-control' placeholder='Name' required ng-model='new_user.name'>
-                            </div>
-                            <div class='form-group'>
-                              <label class='sr-only' for='Email'>Email address</label>
-                              <input type='email' class='form-control' placeholder='Email address' required ng-model='new_user.email'>
-                            </div>
-                          	<div class='form-group'>
-                               <label class='sr-only' for='Password'>Password</label>
-                               <input type='password' class='form-control' placeholder='Password' required ng-model='new_user.pw1'>
-                            </div>
-														<div class='form-group'>
-                               <label class='sr-only' for='Password'>Confirm Password</label>
-                               <input type='password' class='form-control' placeholder='Confirm Password' required ng-model='new_user.pw2'>
-                            </div>
-														<div ng-if='signup_error.length == null'>
-															<p ng-bind='signup_error.message'></p>
-														</div>
-                            <div class='form-group'>
-                               <button type='submit' class='btn btn-success btn-block' ng-click='addUser(new_user)'>Sign Up</button>
-                            </div>
-                          </form>
+              <div ng-controller='usersController'>
+                <ul class='nav navbar-nav navbar-right' ng-if='!sessionUser.loggedIn'>
+                  <!-- Sign Up dropdown-menu -->
+                  <li class='dropdown'>
+                    <a href='' class='dropdown-toggle' id='sign_up' data-toggle='dropdown'>Sign Up <b class='caret'></b></a>
+                    <ul class='dropdown-menu' style='padding: 15px;min-width: 250px;'>
+                      <li>
+                        <div class='row'>
+                          <div class='col-md-12'>
+                            <form class='form' role='form' id='login-nav'>
+                              <div class='form-group'>
+                                <label class='sr-only' for='Name'>Name</label>
+                                <input type='text' class='form-control' placeholder='Name' required ng-model='new_user.name'>
+                              </div>
+                              <div class='form-group'>
+                                <label class='sr-only' for='Email'>Email address</label>
+                                <input type='email' class='form-control' placeholder='Email address' required ng-model='new_user.email'>
+                              </div>
+                              <div class='form-group'>
+                                 <label class='sr-only' for='Password'>Password</label>
+                                 <input type='password' class='form-control' placeholder='Password' required ng-model='new_user.pw1'>
+                              </div>
+                              <div class='form-group'>
+                                 <label class='sr-only' for='Password'>Confirm Password</label>
+                                 <input type='password' class='form-control' placeholder='Confirm Password' required ng-model='new_user.pw2'>
+                              </div>
+                              <div ng-if='signup_error.length == null'>
+                                <p ng-bind='signup_error.message'></p>
+                              </div>
+                              <div class='form-group'>
+                                 <button type='submit' class='btn btn-success btn-block' ng-click='addUser(new_user)'>Sign Up</button>
+                              </div>
+                            </form>
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-								<!-- Log In dropdown-menu -->
-                <li class='dropdown' >
-                  <a href='' class='dropdown-toggle' id='sign' data-toggle='dropdown'>Log In <b class='caret'></b></a>
-                  <ul class='dropdown-menu' style='padding: 15px;min-width: 250px;'>
-                    <li>
-                      <div class='row'>
-                        <div class='col-md-12'>
-                        	<form class='form' role='form' id='login-nav'>
-                            <div class='form-group'>
-                              <label class='sr-only' for='Email'>Email address</label>
-                              <input type='email' class='form-control' placeholder='Email address' required ng-model='user.email'>
-                            </div>
-                          	<div class='form-group'>
-                               <label class='sr-only' for='Password'>Password</label>
-                               <input type='password' class='form-control' placeholder='Password' required ng-model='user.password'>
-                            </div>
-                            <div class='form-group'>
-                               <button type='submit' class='btn btn-success btn-block' ng-click='logIn(user)'>Sign in</button>
-                            </div>
-                          </form>
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- Log In dropdown-menu -->
+                  <li class='dropdown'>
+                    <a href='' class='dropdown-toggle' id='log_in' data-toggle='dropdown'>Log In <b class='caret'></b></a>
+                    <ul class='dropdown-menu' style='padding: 15px;min-width: 250px;'>
+                      <li>
+                        <div class='row'>
+                          <div class='col-md-12'>
+                            <form class='form' role='form' id='login-nav'>
+                              <div class='form-group'>
+                                <label class='sr-only' for='Email'>Email address</label>
+                                <input type='email' class='form-control' placeholder='Email address' required ng-model='user.email'>
+                              </div>
+                              <div class='form-group'>
+                                 <label class='sr-only' for='Password'>Password</label>
+                                 <input type='password' class='form-control' placeholder='Password' required ng-model='user.password'>
+                              </div>
+                              <div class='form-group'>
+                                 <button type='submit' class='btn btn-success btn-block' ng-click='logIn(user)'>Sign in</button>
+                              </div>
+                            </form>
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-								<!-- End of Log in -->
-              </ul>
-							<!-- End of Sign up and Log in section -->
-							<ul class='nav navbar-nav navbar-right' ng-if='sessionUser.loggedIn'>
-								<li class='active'><a href='/' ng-bind='sessionUser.name'></a></li>
-								<form class='navbar-form navbar-left'>
-              		<button class='btn btn-default' ng-click='logout()'>Log out</button>
-								</form>
-              </ul>
-            </div> <!-- end of nav bar collapse -->
-         	</nav>
-      	</div>
-		  </div>
-			<div class='row'>
-		    <div class='col-md-12' ng-view=''></div>
-			</div>
-		</div>
-	</body>
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- End of Log in -->
+                </ul>
+                <!-- End of Sign up and Log in section -->
+                <ul class='nav navbar-nav navbar-right' ng-if='sessionUser.loggedIn'>
+                  <li class='active' id='active'><span class='welcome_message'>Welcome {{sessionUser.name}}!</span></a></li>
+                  <form class='navbar-form navbar-left'>
+                    <button class='btn btn-default' id='log_out' ng-click='logout()'>Log out</button>
+                  </form>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12' ng-view=''></div>
+      </div>
+    </div>
+  </body>
 </html>

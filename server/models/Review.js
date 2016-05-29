@@ -11,7 +11,8 @@ var ReviewSchema = new mongoose.Schema({
 	})
 
 ReviewSchema.path('review').required(true, "Review cannot be blank")
-
+ReviewSchema.path('imdbID').required(true, "imdbID cannot be blank")
+ReviewSchema.path('_creator').required(true, "Creator's ID cannot be blank")
 var Review = mongoose.model("Review", ReviewSchema);
 
 ReviewSchema.plugin(deepPopulate);
