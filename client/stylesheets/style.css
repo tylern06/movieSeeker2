@@ -1,5 +1,5 @@
 #login-nav input {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .form-group {
@@ -7,8 +7,8 @@
 }
 
 .carousel_poster img{
-  margin:auto;
   width: 200px;
+  vertical-align: top;
 }
 
 .display-mode {
@@ -25,36 +25,39 @@
 }
 
 .poster {
-	vertical-align: top;
+  vertical-align: top;
 }
 
 div.box{
-/*	border: 1px solid black;*/
-	min-height: 15%;
-	padding-left: 0px;
+  width: 150px;
+  min-height: 15%;
+  padding-left: 0px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
 }
 
 div.dates{
-	margin-bottom: 2%;
+  margin-bottom: 2%;
 }
 div.title-row{
-	margin-top: 10px;
+  margin-top: 10px;
 }
 div.title{
-	text-align: center;
+  text-align: center;
 }
 div.search-row{
-	margin-bottom: 4%;
+  margin-bottom: 4%;
 }
 
 input.search-movie{
     color: black;
     width: 50%;
 }
-/*youtube background overlay*/
+
 .ui-widget-overlay{
-	background-color: black;
-	background: black;
+  background-color: black;
+  background: black;
 }
 
 .col-centered{
@@ -63,31 +66,31 @@ input.search-movie{
 }
 
 body{
-	background-color: black;
-	/*white color*/
-	color: #F8F8F8;
+  background-color: black;
+  /*white color*/
+  color: #F8F8F8;
 }
 
-.subcontent h1{
-	margin: 0px 0px 5px;
+.subcontent h2{
+  margin: 0px 0px 5px;
 }
 
 .subcontent{
-	margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 a {
-	color: #04bed1;
+  color: #04bed1;
   cursor: pointer;
 }
 
 li.list-group-item{
-	background-color: #191919;
+  background-color: #191919;
   border: #707070;
 }
 
 li.list-group-item a{
-	color: #F8F8F8;
+  color: #F8F8F8;
 /*  color: black;*/
 }
 
@@ -95,9 +98,28 @@ li.list-group-item a{
   border: #191919;
 }
 
-/*set nav bar background color*/
 nav.navbar.navbar-default{
   background-color: #191919;
+}
+
+.panel-default h4{
+  color: white;
+}
+
+div.navbar-header{
+  height: 70px;
+}
+
+.welcome_message{
+  font-size: 20px;
+}
+
+#active{
+  margin-top: 20px;
+}
+
+#log_out{
+  margin-top: 8px;
 }
 
 .panel-default h4{
@@ -111,29 +133,33 @@ div.navbar-header{
 .logo{
   position: relative;
   bottom: 28px;
-  max-width: 200px; 
+  max-width: 200px;
   height: auto
 }
 
-form.navbar-form{
+form#search_form{
   position: relative;
   left: 50px;
   top: 10px;
 }
+
 .panel{
   border:none;
   padding:0;
 }
+
 .panel-heading{
   border:none;
   padding:10px;
   margin:0;
 }
+
 .panel-body{
   border:1px solid #ccc;
   padding:10px;
   border-top:0;
 }
+
 div.collapse, div.navbar-collapse{
   background: #191919;
 }
@@ -145,7 +171,11 @@ a.carousel-control.right, a.carousel-control.left{
 li.dropdown a.dropdown-toggle{
   color: white;
 }
- 
+
+#sign_up, #log_in{
+  margin-top: 10px;
+}
+
 #searchMovie {
   background: #04bed1;
   border: none;
@@ -170,13 +200,13 @@ li.dropdown a.dropdown-toggle{
 }
 
 .movie_card {
-	border: 1px solid silver;
-	margin-bottom: 20px;
+  /*border: 1px solid silver;*/
+  margin-bottom: 20px;
 }
 
 .info, .info_poster{
-	display: inline-block;
-	vertical-align: top;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .info_poster img{
@@ -184,33 +214,29 @@ li.dropdown a.dropdown-toggle{
   width: 140px;
 }
 
-.info table, .info td{
-	border: 1px solid white;
-}
-
 .info table{
-	border-collapse: collapse;
-	width: 650px;
-	margin-left: 5px;
+  border-collapse: collapse;
+  width: 650px;
+  margin-left: 5px;
 }
 
 .title{
-	font-size: 20px;
+  font-size: 20px;
 }
 
 .detail_info, .detail_poster{
-	display: inline-block;
-	vertical-align: top;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .detail_info {
-	/*border: 1px solid silver;*/
-	width: 535px;
-	margin-left: 5px;
+  /*border: 1px solid silver;*/
+  width: 535px;
+  margin-left: 5px;
 }
 
 h1{
-	margin-top: 0px;
+  margin-top: 0px;
 }
 
 .detail_poster img{
@@ -218,16 +244,33 @@ h1{
   width: 300px;
 }
 
+div.page-links{
+  text-align: center;
+}
+
+button.page-btn {
+  background-color: #04bed1;
+}
+
+.review h2{
+  margin: 30px 0px 10px;
+}
+
+.leave_review{
+  color: black;
+}
+
+#review{
+  color: black;
+}
+
 div.pagination-div{
   background-color: #191919;
   width: 100%;
 }
 
-  div.page-links{
-   text-align: center;
-  }
-button.page-btn {
- background-color: #04bed1;
+div.page-links{
+ text-align: center;
 }
 
 ul.list-group {
