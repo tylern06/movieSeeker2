@@ -11,6 +11,9 @@ myAppModule.config(function ($routeProvider) {
 	.when('/movie_search',{
 		templateUrl: 'partials/movie_search.html'
 	})
+	.when('/movie_search/:page_num',{
+		templateUrl: 'partials/movie_search.html'
+	})
 	.when('/showtime/:id',{
 		templateUrl: 'partials/showtime.html'
 	})
@@ -24,3 +27,20 @@ myAppModule.config(function ($routeProvider) {
 		redirectTo: '/'
 	});
 });
+
+//filter for pagination
+myAppModule.filter('pagination', function() {
+  return function(input, start) {
+    if (!input || !input.length) { return; }
+    start = +start; //parse to int
+    return input.slice(start);
+  }
+});
+
+myAppModule.directive('onLastRepeat', function() {
+  return function(scope, element, attrs) {
+    if (scope.$last) setTimeout(function(){
+        scope.$emit('onRepeatLast', element, attrs);
+    }, 1);
+  };
+})
