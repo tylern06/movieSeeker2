@@ -1,11 +1,3 @@
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("a.youtube").YouTubePopup({hideTitleBar: true, showBorder: false, overlayOpacity: 0.95, width:860,height:505});	
-	})
-	$(document).on('click', 'a.youtube', function() {
-		YouTubePopup({hideTitleBar:true, showBorder:false, overlayOpacity:0.95, width:860, height:506});
-	});
-</script>
 <div class='row'>
 	<div class='col-md-9'>
 		<div ng-controller='movieController'>
@@ -27,35 +19,81 @@
 						Director: {{movie.Director}}<br>
 						Writer: {{movie.Writer}}<br><br>
 						<b>Trailer:</b><br>
-						<a href='https://www.youtube.com/watch?v={{movie.results[0].key}}' class='youtube'>{{movie.results[0].name}}</a><br>
-						<!-- <div ng-repeat='trailer in movie.results' on-finish-render>
+						<div ng-repeat='trailer in movie.results' on-last-repeat>
 							<a class='youtube' href='https://www.youtube.com/watch?v={{trailer.key}}'>{{trailer.name}}</a><br>
-						</div> -->
+						</div>
 					</div>
 	      </div>
 			</div>
+			<div class='row'>
+				<div class='review col-md-12'>
+					<h2>Reviews</h2>
+					<hr>
+					<h4>User Reviews</h4>
+					<div>
+						<div ng-repeat='review in our_reviews'>
+							<u>{{review._creator.name}}</u><br>
+							{{review.review}}<br><br>
+						</div>
+						<div style='text-align: right;'>
+							<form>
+								<textarea id='review' ng-model='new_review.content' rows='3' style='width:100%;'></textarea><br>
+								<!-- <input class='leave_review' type='submit' value='Add your review' ng-click='addReview(sessionUser._id)'> -->
+								<button type='submit' class='btn-md btn-default' ng-click='addReview(movie.imdbID)'>Add your review</button>
+							</form>
+						</div>
+					</div>
+					<hr>
+					<h4>Reviews from tmdb site</h4>
+					<div ng-repeat='review in reviews.results'>
+						<u>{{review.author}}</u><br>
+						{{review.content}}<br><br>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class='col-md-3'>
+  <div class='col-md-3' ng-controller='moviesController'>
 		<div class='panel panel-default'>
-			<div class="panel-heading" style='background:black'>
+			<div class="panel-heading" style='background:#04bed1'>
 				<h4>Theaters Nearby</h4>
 				<form>
 					<input type='text' placeholder='Address, ZIP code' ng-model='newTheater.address'>
-					<input type='submit' value='Search'  ng-click='searchTheaters()'>
+					<button type='submit' class='btn-md btn-default' value='Seek'  ng-click='searchTheaters()'>Seek</button>
 				</form>
 			</div>
-			<ul class="list-group">
-			<div class='show' dir-paginate='show in showtimes | itemsPerPage: 15'>
-			<li class="list-group-item"><a href="#/theater/{{show.name}}">{{show.name}}</a></li>
-			</div>
+			 <ul class="list-group">
+				<div class='show' ng-repeat='show in showtimes | pagination: curPage2 * pageSize2 | limitTo: pageSize2'>
+					<li class="list-group-item"><a href="#/theater/{{show.name}}">{{show.name}}</a></li>
+				</div>
 			</ul>
-				<dir-pagination-controls
-					max-size="15"
-					direction-links="true"
-					boundary-links="true" >
-				</dir-pagination-controls>
+				<!-- 	pagination div -->
+			<div class="pagination-div" ng-show="showtimes.length">
+				<div class='page-links'>
+					<button type="button" class="btn btn-primary page-btn" ng-disabled="curPage2 == 0" ng-click="curPage2=curPage2-1"> &lt;  PREV</button>
+					<span>Page {{curPage2 + 1}} of {{ numberOfPages2() }}</span>
+					<button type="button" class="btn btn-primary page-btn" ng-disabled="curPage2 >= showtimes.length/pageSize2 - 1" ng-click="curPage2 = curPage2+1">NEXT &gt; </button>
+				</div>
+			</div> <!-- end of pagination -->
 		</div>
+
+		<div class='panel panel-default'>
+			<div class="panel-heading" style='background:#04bed1'>
+				<h4>Latest Movie News</h4>
+			</div>
+			 <ul class="list-group">
+				<div class='show' ng-repeat='article in news | pagination: curPage * pageSize | limitTo: pageSize'>
+					<li class="list-group-item"><a href="{{article.url}}" target="_blank">{{article.title}}</a></li>
+				</div>
+			</ul>
+			<!-- 	pagination div -->
+			<div class="pagination-div" ng-show="news.length">
+				<div class='page-links'>
+					<button type="button" class="btn btn-primary page-btn" ng-disabled="curPage == 0" ng-click="curPage=curPage-1"> &lt;  PREV</button>
+					<span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+					<button type="button" class="btn btn-primary page-btn" ng-disabled="curPage >= news.length/pageSize - 1" ng-click="curPage = curPage+1">NEXT &gt; </button>
+				</div>
+			</div> <!-- end of pagination -->
+  	</div>
 	</div>
 </div>
-
