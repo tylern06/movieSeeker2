@@ -10,17 +10,10 @@ myAppModule.controller('usersController', function ($scope, userFactory, $routeP
 	})
 
 	$scope.logIn = function(user) {
-		// console.log(user);
 		userFactory.getUser(user, function(data){
-			// console.log('user login data:', data);
-			if(data.status == false){
-				$scope.errors = data.errors
-			} else {
-				userFactory.getSession(function(data){
-					$scope.sessionUser = data;
-					// console.log("user session data:", $scope.sessionUser);
-				})
-			}
+			$scope.sessionUser = data;
+			console.log("user session data:", $scope.sessionUser);
+      console.log($scope.sessionUser.loggedIn);
 		})
 	}
 
@@ -41,7 +34,6 @@ myAppModule.controller('usersController', function ($scope, userFactory, $routeP
 
 	$scope.logout = function(){
     userFactory.logout(function(info){
-			// console.log(info.sessionUser.loggedIn);
       if(!info.sessionUser.loggedIn){
         $scope.sessionUser = info.sessionUser
 				$scope.logout_error = {};
