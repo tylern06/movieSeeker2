@@ -5,7 +5,7 @@ myAppModule.factory('newsFactory', function($http){
 	  'api-key': "9517057724134dafb3dc9fc62c9ee1b4"
 	});
 
-   
+
 	factory.getNews = function(callback){
 		$.ajax({
 			url: url,
