@@ -6,6 +6,7 @@ var favorites = require('../controllers/favorites.js')
 var showtimes = require('../controllers/showtimes.js')
 var movies = require('../controllers/movies.js')
 
+//pass in app = expess() as a parameter 
 module.exports = function(app){
 	//display all users
 	app.get('/users', function (req, res){

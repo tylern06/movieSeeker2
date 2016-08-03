@@ -84,7 +84,7 @@
                                  <label class='sr-only' for='Password'>Confirm Password</label>
                                  <input type='password' class='form-control' placeholder='Confirm Password' required ng-model='new_user.pw2'>
                               </div>
-                              <div ng-if='signup_error.length == null'>
+                              <div ng-if='signup_error.length > 0'>
                                 <p ng-bind='signup_error.message'></p>
                               </div>
                               <div class='form-group'>
