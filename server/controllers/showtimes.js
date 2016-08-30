@@ -6,7 +6,8 @@ console.log('now', now)
 // console.log('now', now._d.format('LLL'))
 module.exports = {
 	index: function(req,res){
-		var api = new Showtimes({latitude: req.latitude, longitude: req.longitude}, {date: '0'});
+		// var api = new Showtimes({latitude: req.latitude, longitude: req.longitude}, {date: '0'});
+		var api = new Showtimes({location: 'Seattle'}, {date: '0'});
 		api.getTheaters(function (error, theaters) {
 			if (error) {
 				throw error
